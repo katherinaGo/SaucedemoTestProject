@@ -1,4 +1,3 @@
-/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.TestPlatform.PlatformAbstractions.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/NUnit3.TestAdapter.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/NUnit3.TestAdapter.pdb
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/nunit.engine.dll
@@ -12,6 +11,7 @@
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/AngleSharp.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.VisualStudio.CodeCoverage.Shim.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.TestPlatform.CoreUtilities.dll
+/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.TestPlatform.PlatformAbstractions.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.VisualStudio.TestPlatform.ObjectModel.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.TestPlatform.CommunicationUtilities.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Microsoft.TestPlatform.CrossPlatEngine.dll
@@ -21,6 +21,7 @@
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/Newtonsoft.Json.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/NuGet.Frameworks.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/nunit.framework.dll
+/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/WebDriver.Support.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/WebDriver.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/ICSharpCode.SharpZipLib.dll
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/WebDriverManager.dll
@@ -100,4 +101,3 @@
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/obj/Debug/net6.0/LoginTests.pdb
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/obj/Debug/net6.0/LoginTests.genruntimeconfig.cache
 /Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/obj/Debug/net6.0/ref/LoginTests.dll
-/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/LoginTests/bin/Debug/net6.0/WebDriver.Support.dll

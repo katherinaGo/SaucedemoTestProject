@@ -1,7 +1,14 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
-  &lt;PhysicalFolder Path="/Users/kate/.nuget/packages/selenium.chrome.webdriver/85.0.0" Loaded="True" /&gt;
+  &lt;PhysicalFolder Path="/Users/kate/.nuget/packages/webdrivermanager/2.14.1" Loaded="True" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=3ceeb579_002De1bd_002D4f81_002Da99e_002Dac3126249e17/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from UnitTest1.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;ProjectFile&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/f:UnitTest1.cs&lt;/ProjectFile&gt;
-&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=59c2db7f_002D2923_002D40b0_002Db6e0_002D680c5c0c4151/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="LogOutTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E::net6.0::LoginTests.LoginTests.LogOutTest&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=71ab5fc8_002Dceea_002D4a6e_002Dbfc0_002D1dd163950a83/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LogOutTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;ProjectFile&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/f:LoginTests.cs&lt;/ProjectFile&gt;
+&lt;/SessionState&gt;</s:String>
+	
+	</wpf:ResourceDictionary>

@@ -12,7 +12,7 @@ public class ProductsPage : WebPage
 
     private readonly By _menuXPath = By.XPath("//*[@id=\"menu_button_container\"]/div/div[1]/div");
     private readonly By _logOutBtnXPath = By.XPath("//*[@id=\"logout_sidebar_link\"]");
-    private readonly By _userNameFieldId = By.Id("user-name");
+    private readonly By _logInButtonXpath = By.XPath("//*[@id=\"login-button\"]");
     private static WebDriverWait _wait;
 
     public ProductsPage(IWebDriver driver) : base(driver)
@@ -57,20 +57,26 @@ public class ProductsPage : WebPage
 
     public bool CheckIfUserLoggedOut()
     {
+        bool result;
         try
         {
-            if (FindElement(_userNameFieldId).Displayed)
+            if (IsElementFound(_logInButtonXpath))
             {
-                return true;
+                result = true;
+            }
+            else
+            {
+                result = false;
             }
         }
         catch (NoSuchElementException ex)
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);
+            result = false;
         }
 
-        return false;
+        return result;
     }
 
     private bool IsElementVisibleExplicitWait(By selector)

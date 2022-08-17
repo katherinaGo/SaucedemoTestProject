@@ -1,10 +1,11 @@
 using LoginTests.Pages;
+using NUnit.Framework.Internal;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 
 namespace LoginTests;
 
-public class Tests
+public class LoginTests
 {
     private const string Url = "https://www.saucedemo.com/";
     private readonly string _userNameStandard = "standard_user"; // TODO check where to keep secret info as creds
@@ -37,7 +38,8 @@ public class Tests
     {
         _productsPage.OpenProductsPage();
         bool actualResult = _productsPage.CheckIfErrorDisplayedWhenNotLoggedIn();
-        Assert.AreEqual(true, actualResult);
+        Assert.That(actualResult, Is.EqualTo(true),
+            "Error is not displayed if user tries to open products not being logged in.");
     }
 
     [Test]
@@ -48,7 +50,7 @@ public class Tests
         _productsPage.OpenMenu();
         _productsPage.ClickLogOutButton();
         bool actualResult = _productsPage.CheckIfUserLoggedOut();
-        Assert.AreEqual(true, actualResult);
+        Assert.That(actualResult, Is.EqualTo(true), "User is not logged out or element was not found.");
     }
 
     [TearDown]

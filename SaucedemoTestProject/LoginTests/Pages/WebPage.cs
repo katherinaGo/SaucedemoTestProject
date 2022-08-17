@@ -1,4 +1,3 @@
-
 using OpenQA.Selenium;
 
 namespace LoginTests.Pages;
