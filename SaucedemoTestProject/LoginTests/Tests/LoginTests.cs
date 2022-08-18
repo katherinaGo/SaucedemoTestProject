@@ -2,8 +2,6 @@ namespace LoginTests.Tests;
 
 public class LoginTests : BaseTest
 {
-    private readonly string _password = "secret_sauce";
-
     [Test]
     public void LogInAsStandardUserTest()
     {

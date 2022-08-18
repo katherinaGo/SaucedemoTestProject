@@ -7,6 +7,7 @@ namespace LoginTests.Tests;
 public class BaseTest
 {
     protected const string Url = "https://www.saucedemo.com/";
+    protected readonly string _password = "secret_sauce";
     protected LoginPage _loginPage;
     protected ProductsPage _productsPage;
     protected static WebPage _page;

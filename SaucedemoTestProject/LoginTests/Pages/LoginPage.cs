@@ -6,9 +6,9 @@ public class LoginPage : WebPage
 {
     private readonly By _userNameFieldId = By.Id("user-name");
     private readonly By _passwordFieldXpath = By.XPath("//*[@id=\"password\"]");
-    private readonly By _logInButtonXpath = By.XPath("//*[@id=\"login-button\"]");
-    private readonly By _productsTitleInHeaderXpath = By.XPath("//*[@id=\"header_container\"]/div[2]/span");
-    private readonly By _lockedOutError = By.XPath("//*[@id=\"login_button_container\"]/div/form/div[3]/h3");
+    private readonly By _logInButtonCss = By.CssSelector("#login-button");
+    private readonly By _productsTitleInHeaderCss = By.CssSelector(".header_secondary_container");
+    private readonly By _lockedOutErrorCss = By.CssSelector(".error-message-container");
 
     public LoginPage(IWebDriver driver) : base(driver)
     {
@@ -18,16 +18,16 @@ public class LoginPage : WebPage
     {
         InputDataToField(_userNameFieldId, login);
         InputDataToField(_passwordFieldXpath, password);
-        ClickButton(_logInButtonXpath);
+        ClickButton(_logInButtonCss);
     }
 
     public bool CheckIfLoggedIn()
     {
-        return IsElementFound(_productsTitleInHeaderXpath);
+        return IsElementFound(_productsTitleInHeaderCss);
     }
 
     public bool CheckIfLockedOutErrorDisplayed()
     {
-        return IsElementFound(_lockedOutError);
+        return IsElementFound(_lockedOutErrorCss);
     }
 }

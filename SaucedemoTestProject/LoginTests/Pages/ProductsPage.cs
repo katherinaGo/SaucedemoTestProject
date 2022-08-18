@@ -6,13 +6,11 @@ namespace LoginTests.Pages;
 public class ProductsPage : WebPage
 {
     private readonly string _productsUrl = "https://www.saucedemo.com/inventory.html";
-
-    private readonly By _errorMessageWhenOpenProductsBeingNotLogInXPath =
-        By.XPath("//*[@id=\"login_button_container\"]/div/form/div[3]/h3");
-
-    private readonly By _menuXPath = By.XPath("//*[@id=\"menu_button_container\"]/div/div[1]/div");
-    private readonly By _logOutBtnXPath = By.XPath("//*[@id=\"logout_sidebar_link\"]");
-    private readonly By _logInButtonXpath = By.XPath("//*[@id=\"login-button\"]");
+    private readonly By _errorMessageWhenOpenProductsBeingNotLogInCss = By.CssSelector(".error-message-container");
+    private readonly By _menuCss = By.CssSelector("#react-burger-menu-btn");
+    private readonly By _logOutBtnCss = By.CssSelector("#logout_sidebar_link");
+    private readonly By _logInButtonCss = By.CssSelector("#login-button");
+    private readonly By _productsCss = By.CssSelector(".inventory_item");
     private static WebDriverWait _wait;
 
     public ProductsPage(IWebDriver driver) : base(driver)
@@ -26,21 +24,22 @@ public class ProductsPage : WebPage
 
     public bool CheckIfErrorDisplayedWhenNotLoggedIn()
     {
-        return IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInXPath);
+        return IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInCss);
     }
 
     public void OpenMenu()
     {
-        ClickButton(_menuXPath);
+        ClickButton(_menuCss);
+        _wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
     }
 
     public void ClickLogOutButton()
     {
         try
         {
-            if (IsElementVisibleExplicitWait(_logOutBtnXPath).Equals(true))
+            if (IsElementVisibleExplicitWait(_logOutBtnCss).Equals(true))
             {
-                ClickButton(_logOutBtnXPath);
+                ClickButton(_logOutBtnCss);
             }
         }
         catch (WebDriverTimeoutException ex)
@@ -50,9 +49,10 @@ public class ProductsPage : WebPage
         }
     }
 
-    public void GetAllMenuItems()
+    public IList<IWebElement> GetAllMenuItems()
     {
-        IList<IWebElement> menuSections = FindElements(_menuXPath);
+        IList<IWebElement> menuSections = FindElements(_menuCss);
+        return menuSections;
     }
 
     public bool CheckIfUserLoggedOut()
@@ -60,7 +60,7 @@ public class ProductsPage : WebPage
         bool result;
         try
         {
-            if (IsElementFound(_logInButtonXpath))
+            if (IsElementFound(_logInButtonCss))
             {
                 result = true;
             }
@@ -83,5 +83,16 @@ public class ProductsPage : WebPage
     {
         _wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
         return _wait.Until(d => FindElement(selector)).Displayed;
+    }
+
+    private IList<IWebElement> GetAllProducts()
+    {
+        return FindElements(_productsCss);
+    }
+
+    public bool CheckIfItemsDisplayed()
+    {
+        IList<IWebElement> productsList = GetAllProducts();
+        return productsList.Count != 0;
     }
 }
