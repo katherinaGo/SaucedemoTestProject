@@ -52,4 +52,9 @@ public class WebPage
         _driver.SwitchTo().NewWindow(WindowType.Tab);
         _driver.SwitchTo().NewWindow(WindowType.Window);
     }
+
+    protected void ClearCookieAndCache()
+    {
+        
+    }
 }
