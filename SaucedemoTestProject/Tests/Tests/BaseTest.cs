@@ -7,24 +7,47 @@ namespace Tests.Tests;
 public class BaseTest
 {
     protected const string Url = "https://www.saucedemo.com/";
-    protected readonly string _password = "secret_sauce";
-    protected LoginPage _loginPage;
-    protected ProductsPage _productsPage;
-    protected static WebPage _page;
-    protected static IWebDriver _driver;
+    private LoginPage _loginPage;
+    private ProductsPage _productsPage;
+    private static WebPage _page;
+    private static IWebDriver _driver;
+
+    protected LoginPage LoginPage
+    {
+        get => _loginPage;
+        private set => _loginPage = value;
+    }
+
+    protected ProductsPage ProductsPage
+    {
+        get => _productsPage;
+        private set => _productsPage = value;
+    }
+
+    protected static WebPage Page
+    {
+        get => _page;
+        private set => _page = value;
+    }
+
+    protected static IWebDriver Driver
+    {
+        get => DriverInstance.Driver;
+        set => _driver = value;
+    }
 
     [SetUp]
     public void SetUp()
     {
-        _driver = DriverSingletone.Driver;
-        _page = new WebPage(_driver);
-        _loginPage = new LoginPage(_driver);
-        _productsPage = new ProductsPage(_driver);
+        Driver = DriverInstance.Driver;
+        Page = new WebPage(_driver);
+        LoginPage = new LoginPage(_driver);
+        ProductsPage = new ProductsPage(_driver);
     }
 
     [TearDown]
     public void TearDown()
     {
-        DriverSingletone.CloseBrowser();
+        DriverInstance.CloseBrowser();
     }
 }

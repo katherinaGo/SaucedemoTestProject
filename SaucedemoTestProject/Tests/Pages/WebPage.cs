@@ -1,4 +1,3 @@
-using log4net;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 
@@ -7,23 +6,16 @@ namespace Tests.Pages;
 public class WebPage
 {
     private static IWebDriver _driver;
-    private static ILog _log;
     private static WebDriverWait _wait;
 
     public WebPage(IWebDriver driver)
     {
         _driver = driver;
-        _log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod()?.DeclaringType);
     }
 
     public static IWebDriver Driver
     {
         get => _driver;
-    }
-
-    public static ILog Log
-    {
-        get => _log;
     }
 
     public static WebDriverWait Wait
@@ -34,7 +26,6 @@ public class WebPage
     public void OpenWebsite(string url)
     {
         _driver.Navigate().GoToUrl(url);
-        _log.Info($"Website {GetCurrentUrlOfPage()} is opened.");
         _driver.Manage().Window.Maximize();
     }
 

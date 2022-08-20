@@ -1,7 +1,7 @@
 ﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
 	<s:String x:Key="/Default/Environment/AssemblyExplorer/XmlDocument/@EntryValue">&lt;AssemblyExplorer&gt;
   &lt;PhysicalFolder Path="/Users/kate/.nuget/packages/webdrivermanager/2.14.1" Loaded="True" /&gt;
-  &lt;Assembly Path="/Users/kate/.nuget/packages/log4net/2.0.15/lib/netstandard2.0/log4net.dll" /&gt;
+  &lt;Assembly Path="/Users/kate/.nuget/packages/webdrivermanager/2.14.1/lib/netstandard2.1/WebDriverManager.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c16666c0_002Dfe7d_002D45d0_002Dbb88_002D58fda7e17404/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="All tests from LoginTests.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;ProjectFolder&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/d:Tests&lt;/ProjectFolder&gt;

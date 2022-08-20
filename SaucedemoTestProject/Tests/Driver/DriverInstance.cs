@@ -5,7 +5,7 @@ using OpenQA.Selenium.Safari;
 
 namespace Tests.Driver;
 
-public class DriverSingletone
+public static class DriverInstance
 {
     private static IWebDriver _driver;
 

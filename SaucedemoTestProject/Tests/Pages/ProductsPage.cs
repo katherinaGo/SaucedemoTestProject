@@ -5,7 +5,10 @@ namespace Tests.Pages;
 public class ProductsPage : WebPage
 {
     private readonly string _productsUrl = "https://www.saucedemo.com/inventory.html";
-    private readonly By _errorMessageWhenOpenProductsBeingNotLogInCss = By.CssSelector(".error-message-container");
+
+    private readonly By _errorMessageWhenOpenProductsBeingNotLogInXPath =
+        By.XPath("//h3[contains(text(), 'You can only access ')]");
+
     private readonly By _menuCss = By.CssSelector("#react-burger-menu-btn");
     private readonly By _logOutBtnCss = By.CssSelector("#logout_sidebar_link");
     private readonly By _logInButtonCss = By.CssSelector("#login-button");
@@ -23,7 +26,7 @@ public class ProductsPage : WebPage
 
     public bool CheckIfErrorDisplayedWhenNotLoggedIn()
     {
-        return IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInCss);
+        return IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInXPath);
     }
 
     public ProductsPage OpenMenu()
@@ -42,6 +45,11 @@ public class ProductsPage : WebPage
             }
         }
         catch (WebDriverTimeoutException ex)
+        {
+            Console.WriteLine(ex.Message);
+            Console.WriteLine(ex.StackTrace);
+        }
+        catch (NoSuchElementException ex)
         {
             Console.WriteLine(ex.Message);
             Console.WriteLine(ex.StackTrace);

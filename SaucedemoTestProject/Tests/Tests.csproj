@@ -10,7 +10,6 @@
 
     <ItemGroup>
         <PackageReference Include="AngleSharp" Version="0.17.1" />
-        <PackageReference Include="log4net" Version="2.0.15" />
         <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.3.0" />
         <PackageReference Include="Microsoft.Win32.Registry" Version="5.0.0" />
         <PackageReference Include="NUnit" Version="3.13.3" />
@@ -27,7 +26,6 @@
         <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
         <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
         <PackageReference Include="WebDriver.GeckoDriver" Version="0.20.1" />
-        <PackageReference Include="WebDriverManager" Version="2.14.1" />
     </ItemGroup>
 
 </Project>

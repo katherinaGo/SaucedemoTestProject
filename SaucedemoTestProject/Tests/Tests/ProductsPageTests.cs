@@ -1,3 +1,5 @@
+using Tests.Model;
+
 namespace Tests.Tests;
 
 public class ProductsPageTests : BaseTest
@@ -5,9 +7,9 @@ public class ProductsPageTests : BaseTest
     [Test]
     public void CheckIfProductsDisplayedWhenLoggedIn()
     {
-        _loginPage.OpenWebsite(Url);
-        _loginPage.LogInToAccount(Users.problem_user.ToString(), _password);
-        bool actualResult = _productsPage.CheckIfItemsDisplayed();
+        LoginPage.OpenWebsite(Url);
+        LoginPage.LogInToAccount(new User(UsersCredentials.problem_user));
+        bool actualResult = ProductsPage.CheckIfItemsDisplayed();
         Assert.True(actualResult, "No items displayed");
     }
 }
