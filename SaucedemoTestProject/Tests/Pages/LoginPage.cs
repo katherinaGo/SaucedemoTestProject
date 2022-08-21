@@ -1,6 +1,6 @@
 using OpenQA.Selenium;
 using Tests.Exceptions;
-using Tests.Model;
+using Tests.Models;
 
 namespace Tests.Pages;
 

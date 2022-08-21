@@ -1,4 +1,4 @@
-namespace Tests.Model;
+namespace Tests.Models;
 
 public class User
 {

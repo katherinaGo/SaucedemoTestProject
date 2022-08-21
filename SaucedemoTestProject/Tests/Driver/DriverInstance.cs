@@ -2,6 +2,7 @@ using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
+using Tests.Exceptions;
 
 namespace Tests.Driver;
 
@@ -14,11 +15,14 @@ public static class DriverInstance
         get
         {
             //TODO get this browser value from DB 
-            string _browser = "chrome";
+            string browser = "chrome";
             if (_driver == null)
             {
-                switch (_browser)
+                switch (browser)
                 {
+                    case "chrome":
+                        _driver = new ChromeDriver();
+                        break;
                     case "safari":
                         _driver = new SafariDriver();
                         break;
@@ -26,14 +30,18 @@ public static class DriverInstance
                         _driver = new FirefoxDriver();
                         break;
                     default:
-                        _driver = new ChromeDriver();
-                        break;
+                        throw new NoSuchDriverException("Can't open such driver.");
                 }
             }
 
             return _driver;
         }
     }
+
+    // private static string GetDefaultBrowserName()
+    // {
+    //     return DbCommunication.GetDefaultBrowserToRunTests();
+    // }
 
     public static void CloseBrowser()
     {

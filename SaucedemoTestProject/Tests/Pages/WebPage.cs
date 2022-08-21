@@ -64,7 +64,7 @@ public class WebPage
     {
     }
 
-    private string GetCurrentUrlOfPage()
+    protected string GetCurrentUrlOfPage()
     {
         return _driver.Url;
     }

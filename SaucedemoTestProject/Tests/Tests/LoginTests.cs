@@ -1,4 +1,4 @@
-using Tests.Model;
+using Tests.Models;
 
 namespace Tests.Tests;
 
