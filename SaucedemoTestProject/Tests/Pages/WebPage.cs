@@ -53,19 +53,4 @@ public class WebPage
     {
         return FindElement(selector).Displayed;
     }
-
-    protected void OpenBrowserNewTab()
-    {
-        _driver.SwitchTo().NewWindow(WindowType.Tab);
-        _driver.SwitchTo().NewWindow(WindowType.Window);
-    }
-
-    protected void ClearCookieAndCache()
-    {
-    }
-
-    protected string GetCurrentUrlOfPage()
-    {
-        return _driver.Url;
-    }
 }
