@@ -1,4 +1,3 @@
-using Microsoft.VisualBasic;
 using Serilog;
 
 namespace Tests.MyLogger;
@@ -14,10 +13,9 @@ public class Logger
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Information()
             .WriteTo.Console().WriteTo.File(
-                $"/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/Logs/log_" +
-                $"{DateTime.Today.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}_{counter}.txt",
-                fileSizeLimitBytes: 30000)
-            .CreateLogger();
+                $"/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/Logs/log_"
+                + $"{DateTime.Today.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt",
+                rollOnFileSizeLimit: true, fileSizeLimitBytes: 2020).CreateLogger();
         counter++;
     }
 
