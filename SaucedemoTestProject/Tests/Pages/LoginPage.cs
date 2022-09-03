@@ -1,6 +1,8 @@
+using System.Reflection;
 using OpenQA.Selenium;
 using Tests.Exceptions;
 using Tests.Models;
+using Tests.Reflection;
 
 namespace Tests.Pages;
 
@@ -25,8 +27,12 @@ public class LoginPage : WebPage
         {
             if (user.UserName.Equals(UsersCredentials.invalidCredsUser.ToString()))
             {
+                MyLogger.ErrorLogger("Can't log in to the account with invalid credentials",
+                    GetType().Namespace!,
+                    GetType().Name,
+                    MethodBase.GetCurrentMethod()?.Name!);
                 throw new SuchUserDoesntExistException(
-                    "Can't logged in with this user. Login or/and password are invalid or such user doesn't exist.");
+                    "Login or/and password are invalid or such user doesn't exist.");
             }
         }
         catch (SuchUserDoesntExistException e)

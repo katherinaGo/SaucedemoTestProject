@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using Tests.MyLogger;
 
 namespace Tests.Pages;
 
@@ -7,6 +8,7 @@ public class WebPage
 {
     private static IWebDriver _driver;
     private static WebDriverWait _wait;
+    protected readonly Logger MyLogger = new();
 
     public WebPage(IWebDriver driver)
     {

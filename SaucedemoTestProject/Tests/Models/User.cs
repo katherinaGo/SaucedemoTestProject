@@ -11,6 +11,10 @@ public class User
         _password = "secret_sauce";
     }
 
+    public User()
+    {
+    }
+
     public string UserName
     {
         get => _userName;
@@ -19,5 +23,6 @@ public class User
     public string Password
     {
         get => _password;
+        private set => _password = value;
     }
 }

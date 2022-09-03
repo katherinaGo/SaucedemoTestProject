@@ -1,3 +1,4 @@
+using System.Reflection;
 using OpenQA.Selenium;
 using Tests.Driver;
 using Tests.MyLogger;
@@ -62,7 +63,10 @@ public class BaseTest
     public void LoggerTearDown()
     {
         _endTime = _myLogger.FinishProgramLogging();
-        _myLogger.InfoLogger($"Tests time execution: {_endTime - _startTime}, hh:mm:ss:ms");
+        _myLogger.InfoLogger($"Tests time execution: {_endTime - _startTime}, hh:mm:ss:ms",
+            GetType().Namespace!,
+            GetType().Name,
+            MethodBase.GetCurrentMethod()?.Name!);
     }
 
     [TearDown]

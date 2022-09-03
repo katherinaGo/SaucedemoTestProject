@@ -1,3 +1,4 @@
+using System.Reflection;
 using Serilog;
 
 namespace Tests.MyLogger;
@@ -19,18 +20,36 @@ public class Logger
         counter++;
     }
 
-    public void InfoLogger(string logMessage)
+    public void InfoLogger(string logMessage, string nameSpace, string className, string methodName)
     {
+        string? threadName = Thread.CurrentThread.Name;
+        Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
+            nameSpace,
+            className,
+            methodName,
+            threadName);
         Log.Information(logMessage);
     }
 
-    public void DebugLogger(string logMessage)
+    public void DebugLogger(string logMessage, string nameSpace, string className, string methodName)
     {
+        string? threadName = Thread.CurrentThread.Name;
+        Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
+            nameSpace,
+            className,
+            methodName,
+            threadName);
         Log.Debug(logMessage);
     }
 
-    public void ErrorLogger(string logMessage)
+    public void ErrorLogger(string logMessage, string nameSpace, string className, string methodName)
     {
+        string? threadName = Thread.CurrentThread.Name;
+        Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
+            nameSpace,
+            className,
+            methodName,
+            threadName);
         Log.Error(logMessage);
     }
 
