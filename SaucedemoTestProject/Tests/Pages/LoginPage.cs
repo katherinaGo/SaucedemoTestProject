@@ -2,7 +2,6 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Tests.Exceptions;
 using Tests.Models;
-using Tests.Reflection;
 
 namespace Tests.Pages;
 
@@ -53,9 +52,17 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_productsTitleInHeaderCss);
+            MyLogger.InfoLogger("User logged in successfully.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {
+            MyLogger.ErrorLogger("User is not logged in for some reason.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
             Console.WriteLine(e.StackTrace);
             Console.WriteLine(e.Message);
         }
@@ -72,6 +79,10 @@ public class LoginPage : WebPage
         }
         catch (NoSuchElementException e)
         {
+            MyLogger.ErrorLogger("Error is not displayed or not found.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
             Console.WriteLine(e.StackTrace);
             Console.WriteLine(e.Message);
         }
@@ -85,9 +96,17 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_errorInvalidCredsXPath);
+            MyLogger.InfoLogger("Error is displayed when non-existing user tried to log in.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {
+            MyLogger.ErrorLogger("Error is not displayed for non-existing user.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
             Console.WriteLine(e.StackTrace);
             Console.WriteLine(e.Message);
         }

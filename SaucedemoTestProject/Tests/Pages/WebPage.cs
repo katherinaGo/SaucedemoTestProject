@@ -7,7 +7,6 @@ namespace Tests.Pages;
 public class WebPage
 {
     private static IWebDriver _driver;
-    private static WebDriverWait _wait;
     protected readonly Logger MyLogger = new();
 
     public WebPage(IWebDriver driver)
@@ -15,15 +14,10 @@ public class WebPage
         _driver = driver;
     }
 
-    public static IWebDriver Driver
-    {
-        get => _driver;
-    }
+    public static IWebDriver Driver => _driver;
 
-    public static WebDriverWait Wait
-    {
-        get => _wait = new WebDriverWait(Driver, TimeSpan.FromSeconds(5));
-    }
+    public static WebDriverWait Wait => new(Driver, TimeSpan.FromSeconds(5));
+
 
     public void OpenWebsite(string url)
     {
@@ -31,28 +25,19 @@ public class WebPage
         _driver.Manage().Window.Maximize();
     }
 
-    protected IWebElement FindElement(By selector)
-    {
-        return _driver.FindElement(selector);
-    }
+    protected IWebElement FindElement(By selector) => _driver.FindElement(selector);
 
-    protected IList<IWebElement> FindElements(By selector)
-    {
-        return _driver.FindElements(selector);
-    }
+    protected IList<IWebElement> FindElements(By selector) => _driver.FindElements(selector);
 
-    protected void ClickButton(By selector)
-    {
-        FindElement(selector).Click();
-    }
+    protected void ClickButton(By selector) => FindElement(selector).Click();
 
-    protected void InputDataToField(By selector, string textToType)
-    {
-        FindElement(selector).SendKeys(textToType);
-    }
+    protected void InputDataToField(By selector, string textToType) => FindElement(selector).SendKeys(textToType);
 
-    protected bool IsElementFound(By selector)
+    protected bool IsElementFound(By selector) => FindElement(selector).Displayed;
+
+    protected void SelectElementInDropdown(By selector, string textOfItemToClick)
     {
-        return FindElement(selector).Displayed;
+        SelectElement select = new SelectElement(FindElement(selector));
+        select.SelectByText(textOfItemToClick);
     }
 }

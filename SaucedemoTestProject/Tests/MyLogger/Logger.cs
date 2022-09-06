@@ -1,4 +1,3 @@
-using System.Reflection;
 using Serilog;
 
 namespace Tests.MyLogger;
@@ -10,14 +9,12 @@ public class Logger
 
     public void CreateLogger()
     {
-        int counter = 1;
         Log.Logger = new LoggerConfiguration()
-            .MinimumLevel.Information()
+            .MinimumLevel.Debug()
             .WriteTo.Console().WriteTo.File(
                 $"/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/Logs/log_"
                 + $"{DateTime.Today.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt",
-                rollOnFileSizeLimit: true, fileSizeLimitBytes: 2020).CreateLogger();
-        counter++;
+                rollOnFileSizeLimit: true, fileSizeLimitBytes: 30000).CreateLogger();
     }
 
     public void InfoLogger(string logMessage, string nameSpace, string className, string methodName)
@@ -34,7 +31,7 @@ public class Logger
     public void DebugLogger(string logMessage, string nameSpace, string className, string methodName)
     {
         string? threadName = Thread.CurrentThread.Name;
-        Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
+        Log.Logger.Debug("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
             nameSpace,
             className,
             methodName,
@@ -45,7 +42,7 @@ public class Logger
     public void ErrorLogger(string logMessage, string nameSpace, string className, string methodName)
     {
         string? threadName = Thread.CurrentThread.Name;
-        Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
+        Log.Logger.Error("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
             nameSpace,
             className,
             methodName,
