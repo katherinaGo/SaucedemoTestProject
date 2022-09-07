@@ -1,6 +1,5 @@
 using System.Reflection;
 using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace Tests.Pages;
 
@@ -128,8 +127,17 @@ public class ProductsPage : WebPage
 
         if (count.Equals(sortedByComp.Length))
         {
+            MyLogger.InfoLogger("Prices were sorted correctly from low to high",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
             return true;
         }
+
+        MyLogger.ErrorLogger("Prices were sorted incorrect from low to high",
+            GetType().Namespace!,
+            GetType().Name,
+            MethodBase.GetCurrentMethod()?.Name!);
 
         return false;
     }
@@ -173,12 +181,25 @@ public class ProductsPage : WebPage
     {
         string[] pricesStrings = new string[pricesOfItems.Count];
         double[] prices = new Double[pricesOfItems.Count];
-        for (int i = 0; i < pricesOfItems.Count; i++)
+        try
         {
-            pricesStrings[i] = pricesOfItems[i].Text.Trim('$').Replace('.', ',');
-            prices[i] = Convert.ToDouble(pricesStrings[i]);
-        }
+            for (int i = 0; i < pricesOfItems.Count; i++)
+            {
+                pricesStrings[i] = pricesOfItems[i].Text.Trim('$').Replace('.', ',');
+                prices[i] = Convert.ToDouble(pricesStrings[i]);
+            }
 
-        return prices;
+            return prices;
+        }
+        catch (FormatException exception)
+        {
+            Console.WriteLine(exception.StackTrace);
+            Console.WriteLine(exception.Message);
+            MyLogger.ErrorLogger("FormatException, incorrect parsing of string to double.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
+            return null;
+        }
     }
 }

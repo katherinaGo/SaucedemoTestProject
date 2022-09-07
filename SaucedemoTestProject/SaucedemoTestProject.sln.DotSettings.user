@@ -5,12 +5,13 @@
   &lt;Assembly Path="/Users/kate/.nuget/packages/webdrivermanager/2.14.1/lib/netstandard2.1/WebDriverManager.dll" /&gt;
   &lt;Assembly Path="/Users/kate/.nuget/packages/mysql.data/6.9.8/lib/net45/MySql.Data.dll" /&gt;
 &lt;/AssemblyExplorer&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=c16666c0_002Dfe7d_002D45d0_002Dbb88_002D58fda7e17404/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="All tests from LoginTests.cs" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;ProjectFolder&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/d:Tests&lt;/ProjectFolder&gt;
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a214a4f9_002D6bd2_002D4243_002Da1c4_002Db3356de214f5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckIfPossibleToSortByPriceFromLowToHigh" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
+  &lt;TestAncestor&gt;
+    &lt;TestId&gt;NUnit3x::8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E::net6.0::Tests.Tests.ProductsPageTests.CheckIfPossibleToSortByPriceFromLowToHigh&lt;/TestId&gt;
+  &lt;/TestAncestor&gt;
 &lt;/SessionState&gt;</s:String>
-	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=f0d9ae88_002D17ba_002D47e4_002D8402_002D28ae3e07b1ef/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="LogInAsStandardUserTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
-  &lt;ProjectFolder&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/d:Tests&lt;/ProjectFolder&gt;
-&lt;/SessionState&gt;</s:String>
+	
+	
 	
 	
 	
