@@ -40,6 +40,7 @@ public class ProductsPage : WebPage
     {
         try
         {
+            WaitExplicit(_logOutBtnCss);
             if (IsElementVisibleExplicitWait(_logOutBtnCss).Equals(true))
             {
                 ClickButton(_logOutBtnCss);
@@ -76,6 +77,10 @@ public class ProductsPage : WebPage
             }
             else
             {
+                MyLogger.ErrorLogger($"User is not logged out or element '{_logInButtonCss}' not found.",
+                    GetType().Namespace!,
+                    GetType().Name,
+                    MethodBase.GetCurrentMethod()?.Name!);
                 result = false;
             }
         }
@@ -142,7 +147,7 @@ public class ProductsPage : WebPage
         return false;
     }
 
-    private bool IsElementVisibleExplicitWait(By selector) => Wait.Until(d => FindElement(selector)).Displayed;
+    private bool IsElementVisibleExplicitWait(By selector) => WaitImplicit.Until(d => FindElement(selector)).Displayed;
 
     private IList<IWebElement> GetAllProducts()
     {

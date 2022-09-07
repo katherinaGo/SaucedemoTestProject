@@ -1,5 +1,6 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
+using SeleniumExtras.WaitHelpers;
 using Tests.MyLogger;
 
 namespace Tests.Pages;
@@ -16,7 +17,9 @@ public class WebPage
 
     public static IWebDriver Driver => _driver;
 
-    public static WebDriverWait Wait => new(Driver, TimeSpan.FromSeconds(5));
+    public static WebDriverWait WaitImplicit => new(Driver, TimeSpan.FromSeconds(15));
+
+    public static void WaitExplicit(By locator) => WaitImplicit.Until(ExpectedConditions.ElementIsVisible(locator));
 
 
     public void OpenWebsite(string url)

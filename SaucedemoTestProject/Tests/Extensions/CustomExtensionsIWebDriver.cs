@@ -2,7 +2,7 @@ using OpenQA.Selenium;
 
 namespace Tests.Extensions;
 
-public static class CustomExtensions
+public static class CustomExtensionsIWebDriver
 {
     public static string GetCurrentUrlOfPage(this IWebDriver driver)
     {

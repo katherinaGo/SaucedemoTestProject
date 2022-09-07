@@ -1,4 +1,4 @@
-namespace Tests;
+namespace Tests.Models;
 
 public enum UsersCredentials
 {
