@@ -147,7 +147,7 @@ public class ProductsPage : WebPage
         return false;
     }
 
-    private bool IsElementVisibleExplicitWait(By selector) => WaitImplicit.Until(d => FindElement(selector)).Displayed;
+    private bool IsElementVisibleExplicitWait(By selector) => WaitImplicit.Until(_ => FindElement(selector)).Displayed;
 
     private IList<IWebElement> GetAllProducts()
     {
@@ -204,7 +204,7 @@ public class ProductsPage : WebPage
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            return null;
+            return null!;
         }
     }
 }

@@ -4,8 +4,8 @@ namespace Tests.MyLogger;
 
 public class Logger
 {
-    private string _programStarts;
-    private string _programEnds;
+    private string? _programStarts;
+    private string? _programEnds;
 
     public void CreateLogger()
     {

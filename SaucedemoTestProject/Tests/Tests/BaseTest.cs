@@ -9,29 +9,19 @@ namespace Tests.Tests;
 public class BaseTest
 {
     protected const string Url = "https://www.saucedemo.com/";
-    private LoginPage _loginPage;
-    private ProductsPage _productsPage;
-    private static WebPage _page;
-    private static IWebDriver _driver;
+    private static WebPage? _page;
+    private static IWebDriver? _driver;
     private DateTime _startTime;
     private DateTime _endTime;
     private Logger _myLogger;
 
-    protected LoginPage LoginPage
-    {
-        get => _loginPage;
-        private set => _loginPage = value;
-    }
+    protected LoginPage? LoginPage { get; private set; }
 
-    protected ProductsPage ProductsPage
-    {
-        get => _productsPage;
-        private set => _productsPage = value;
-    }
+    protected ProductsPage? ProductsPage { get; private set; }
 
     protected static WebPage Page
     {
-        get => _page;
+        get => _page!;
         private set => _page = value;
     }
 
@@ -53,9 +43,9 @@ public class BaseTest
     public void SetUp()
     {
         Driver = DriverInstance.Driver;
-        Page = new WebPage(_driver);
-        LoginPage = new LoginPage(_driver);
-        ProductsPage = new ProductsPage(_driver);
+        Page = new WebPage(Driver);
+        LoginPage = new LoginPage(Driver);
+        ProductsPage = new ProductsPage(Driver);
     }
 
 

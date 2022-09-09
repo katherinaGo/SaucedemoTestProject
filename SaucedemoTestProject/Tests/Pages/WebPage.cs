@@ -1,13 +1,14 @@
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using Tests.Driver;
 using Tests.MyLogger;
 
 namespace Tests.Pages;
 
 public class WebPage
 {
-    private static IWebDriver _driver;
+    private static IWebDriver? _driver;
     protected readonly Logger MyLogger = new();
 
     public WebPage(IWebDriver driver)
@@ -15,7 +16,9 @@ public class WebPage
         _driver = driver;
     }
 
-    public static IWebDriver Driver => _driver;
+    public string BrowserName { get; set; } = null!;
+
+    public static IWebDriver Driver => DriverInstance.Driver;
 
     public static WebDriverWait WaitImplicit => new(Driver, TimeSpan.FromSeconds(15));
 
@@ -24,13 +27,13 @@ public class WebPage
 
     public void OpenWebsite(string url)
     {
-        _driver.Navigate().GoToUrl(url);
-        _driver.Manage().Window.Maximize();
+        Driver.Navigate().GoToUrl(url);
+        Driver.Manage().Window.Maximize();
     }
 
-    protected IWebElement FindElement(By selector) => _driver.FindElement(selector);
+    protected IWebElement FindElement(By selector) => Driver.FindElement(selector);
 
-    protected IList<IWebElement> FindElements(By selector) => _driver.FindElements(selector);
+    protected IList<IWebElement> FindElements(By selector) => Driver.FindElements(selector);
 
     protected void ClickButton(By selector) => FindElement(selector).Click();
 

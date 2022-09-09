@@ -1,21 +1,25 @@
+using System.Reflection;
+using Newtonsoft.Json;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Safari;
 using Tests.Exceptions;
+using Tests.MyLogger;
+using Tests.Pages;
 
 namespace Tests.Driver;
 
 public static class DriverInstance
 {
-    private static IWebDriver _driver;
+    private static IWebDriver? _driver;
+    private static readonly Logger MyLogger = new();
 
     public static IWebDriver Driver
     {
         get
         {
-            //TODO get this browser value from DB 
-            string browser = "chrome";
+            string browser = GetDefaultBrowserName();
             if (_driver == null)
             {
                 switch (browser)
@@ -30,6 +34,11 @@ public static class DriverInstance
                         _driver = new FirefoxDriver();
                         break;
                     default:
+                        MyLogger.ErrorLogger("Browser name is not found, can't open any browser.",
+                            "Tests.Driver",
+                            "DriverInstance",
+                            MethodBase.GetCurrentMethod()?.Name!);
+
                         throw new NoSuchDriverException("Can't open such driver.");
                 }
             }
@@ -38,14 +47,19 @@ public static class DriverInstance
         }
     }
 
-    // private static string GetDefaultBrowserName()
-    // {
-    //     return DbCommunication.GetDefaultBrowserToRunTests();
-    // }
+    private static string GetDefaultBrowserName()
+    {
+        string json =
+            File.ReadAllText(
+                "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/configuration.json");
+        WebPage? page = JsonConvert.DeserializeObject<WebPage>(json);
+        string defaultBrowserName = page!.BrowserName;
+        return defaultBrowserName;
+    }
 
     public static void CloseBrowser()
     {
-        _driver.Quit();
+        _driver?.Quit();
         _driver = null;
     }
 }
