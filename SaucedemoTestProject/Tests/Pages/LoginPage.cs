@@ -2,6 +2,7 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Tests.Exceptions;
 using Tests.Models;
+using Tests.Reflection;
 
 namespace Tests.Pages;
 
@@ -42,6 +43,7 @@ public class LoginPage : WebPage
 
         InputDataToField(_userNameFieldId, user.UserName);
         InputDataToField(_passwordFieldXpath, user.Password);
+        // InputDataToField(_passwordFieldXpath, UserReflection.SetCustomValueToFieldPassword());
         ClickButton(_logInButtonCss);
         return new ProductsPage(Driver);
     }
@@ -76,6 +78,10 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_lockedOutErrorXPath);
+            MyLogger.InfoLogger("Error for locked user is displayed.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {

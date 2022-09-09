@@ -1,4 +1,3 @@
-using System.Reflection;
 using Tests.Models;
 
 namespace Tests.Reflection;
@@ -11,7 +10,7 @@ public class UserReflection
     public static string SetCustomValueToFieldPassword()
     {
         var password = _myType.GetProperty("Password");
-        password?.SetValue(_user, "secret_sauce");
+        password?.SetValue(_user, "myPassword");
         return _user.Password;
     }
 }

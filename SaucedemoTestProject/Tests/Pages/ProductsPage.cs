@@ -27,8 +27,24 @@ public class ProductsPage : WebPage
         return new ProductsPage(Driver);
     }
 
-    public bool CheckIfErrorDisplayedWhenNotLoggedIn() =>
-        IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInXPath);
+    public bool CheckIfErrorDisplayedWhenNotLoggedIn()
+    {
+        if (IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInXPath))
+        {
+            MyLogger.InfoLogger("Error message is displayed - impossible to open products page not being logged in.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
+            return true;
+        }
+
+        MyLogger.ErrorLogger($"Error message '{_errorMessageWhenOpenProductsBeingNotLogInXPath}' is not displayed.",
+            GetType().Namespace!,
+            GetType().Name,
+            MethodBase.GetCurrentMethod()?.Name!);
+        return false;
+    }
+
 
     public ProductsPage OpenMenu()
     {
@@ -74,6 +90,10 @@ public class ProductsPage : WebPage
             if (IsElementFound(_logInButtonCss))
             {
                 result = true;
+                MyLogger.InfoLogger("User successfully logged out from the account.",
+                    GetType().Namespace!,
+                    GetType().Name,
+                    MethodBase.GetCurrentMethod()?.Name!);
             }
             else
             {
@@ -97,7 +117,16 @@ public class ProductsPage : WebPage
     public bool CheckIfItemsDisplayed()
     {
         IList<IWebElement> productsList = GetAllProducts();
-        return productsList.Count != 0;
+        if (productsList.Count != 0)
+        {
+            MyLogger.InfoLogger($"Products found on the products page.",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
+            return true;
+        }
+
+        return false;
     }
 
     public bool CheckIfTShirtsInTheList()
@@ -113,6 +142,10 @@ public class ProductsPage : WebPage
             return true;
         }
 
+        MyLogger.ErrorLogger("No products are displayed on the products page",
+            GetType().Namespace!,
+            GetType().Name,
+            MethodBase.GetCurrentMethod()?.Name!);
         return false;
     }
 

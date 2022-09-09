@@ -16,14 +16,13 @@ public class WebPage
         _driver = driver;
     }
 
-    public string BrowserName { get; set; } = null!;
+    public string BrowserName { get; set; }
 
     public static IWebDriver Driver => DriverInstance.Driver;
 
     public static WebDriverWait WaitImplicit => new(Driver, TimeSpan.FromSeconds(15));
 
     public static void WaitExplicit(By locator) => WaitImplicit.Until(ExpectedConditions.ElementIsVisible(locator));
-
 
     public void OpenWebsite(string url)
     {
