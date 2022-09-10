@@ -51,7 +51,7 @@ public static class DriverInstance
     {
         string json =
             File.ReadAllText(
-                "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/configuration.json");
+                "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/configuration.json");
         WebPage? page = JsonConvert.DeserializeObject<WebPage>(json);
         string defaultBrowserName = page!.BrowserName;
         return defaultBrowserName;

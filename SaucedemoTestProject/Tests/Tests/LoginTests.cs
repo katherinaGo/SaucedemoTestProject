@@ -1,3 +1,5 @@
+using System.Reflection;
+using Tests.EmailService;
 using Tests.Models;
 
 namespace Tests.Tests;
@@ -10,6 +12,7 @@ public class LoginTests : BaseTest
         Page.OpenWebsite(Url);
         LoginPage?.LogInToAccount(new User(UsersCredentials.standard_user));
         bool actualResult = LoginPage!.CheckIfLoggedIn();
+        TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
         Assert.True(actualResult, "Not logged in");
     }
 

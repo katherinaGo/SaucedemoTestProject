@@ -8,6 +8,7 @@
 	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=a214a4f9_002D6bd2_002D4243_002Da1c4_002Db3356de214f5/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="CheckIfPossibleToSortByPriceFromLowToHigh" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;
   &lt;ProjectFolder&gt;8DBA970D-A73B-4B3B-8D8F-D0A28B85C35E/d:Tests&lt;/ProjectFolder&gt;
 &lt;/SessionState&gt;</s:String>
+	<s:Boolean x:Key="/Default/UserDictionary/Words/=Creds/@EntryIndexedValue">True</s:Boolean>
 	
 	
 	

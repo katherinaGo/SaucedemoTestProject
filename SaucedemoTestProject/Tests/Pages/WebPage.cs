@@ -9,7 +9,7 @@ namespace Tests.Pages;
 public class WebPage
 {
     private static IWebDriver? _driver;
-    protected readonly Logger MyLogger = new();
+    protected static readonly Logger MyLogger = new();
 
     public WebPage(IWebDriver driver)
     {
