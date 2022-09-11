@@ -37,8 +37,10 @@ public class LoginPage : WebPage
         }
         catch (SuchUserDoesntExistException e)
         {
-            Console.WriteLine(e.StackTrace);
-            Console.WriteLine(e.Message);
+            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
 
         InputDataToField(_userNameFieldId, user.UserName);
@@ -61,12 +63,14 @@ public class LoginPage : WebPage
         }
         catch (NoSuchElementException e)
         {
-            MyLogger.ErrorLogger("User is not logged in for some reason.",
+            MyLogger.ErrorLogger("User is not logged in successfully.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            Console.WriteLine(e.StackTrace);
-            Console.WriteLine(e.Message);
+            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
 
         return result;
@@ -89,8 +93,10 @@ public class LoginPage : WebPage
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            Console.WriteLine(e.StackTrace);
-            Console.WriteLine(e.Message);
+            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
 
         return result;
@@ -113,8 +119,10 @@ public class LoginPage : WebPage
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            Console.WriteLine(e.StackTrace);
-            Console.WriteLine(e.Message);
+            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
 
         return result;

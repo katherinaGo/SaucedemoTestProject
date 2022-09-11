@@ -19,28 +19,47 @@ public static class DriverInstance
     {
         get
         {
-            string browser = GetDefaultBrowserName();
-            if (_driver == null)
+            try
             {
-                switch (browser)
+                string browser = GetDefaultBrowserName().ToLower();
+                if (_driver == null)
                 {
-                    case "chrome":
-                        _driver = new ChromeDriver();
-                        break;
-                    case "safari":
-                        _driver = new SafariDriver();
-                        break;
-                    case "firefox":
-                        _driver = new FirefoxDriver();
-                        break;
-                    default:
-                        MyLogger.ErrorLogger("Browser name is not found, can't open any browser.",
-                            "Tests.Driver",
-                            "DriverInstance",
-                            MethodBase.GetCurrentMethod()?.Name!);
+                    switch (browser)
+                    {
+                        case "chrome":
+                            _driver = new ChromeDriver();
+                            break;
+                        case "google chrome":
+                            _driver = new ChromeDriver();
+                            break;
+                        case "safari":
+                            _driver = new SafariDriver();
+                            break;
+                        case "firefox":
+                            _driver = new FirefoxDriver();
+                            break;
+                        case "mazila":
+                            _driver = new FirefoxDriver();
+                            break;
+                        case "mazila firefox":
+                            _driver = new FirefoxDriver();
+                            break;
+                        default:
+                            MyLogger.ErrorLogger("Browser name is not found, can't open any browser.",
+                                "Tests.Driver",
+                                "DriverInstance",
+                                MethodBase.GetCurrentMethod()?.Name!);
 
-                        throw new NoSuchDriverException("Can't open such driver.");
+                            throw new NoSuchDriverException("Can't open such driver.");
+                    }
                 }
+            }
+            catch (NoSuchDriverException e)
+            {
+                MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+                    "Tests.Driver",
+                    "DriverInstance",
+                    MethodBase.GetCurrentMethod()?.Name!);
             }
 
             return _driver;

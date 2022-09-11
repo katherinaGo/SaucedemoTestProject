@@ -6,62 +6,68 @@ namespace Tests.EmailService;
 
 public class EmailSender
 {
-    private string _email;
-    private string _password;
-    private Logger MyLogger = new();
+    private Logger _myLogger = new();
 
-    public string Email
-    {
-        get => _email;
-        private set => _email = value;
-    }
+    private readonly string _pathToEmailCreds =
+        "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/emailInfo.txt";
 
-    public string Password
-    {
-        get => _password;
-        private set => _password = value;
-    }
+    private readonly string _pathToFileWithResults =
+        "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/TestResults.txt";
+
+    public string? Email { get; private set; }
+
+    public string? Password { get; private set; }
 
     public void SendEmailWithResults()
     {
-        SetCredsFromFile();
+        GetCredsFromFile();
         try
         {
-            SmtpMail smtpMail = new SmtpMail("Kate Hovin 2022");
-            smtpMail.From = Email;
-            smtpMail.To = "hovinkate@gmail.com";
-            smtpMail.Subject = "Test Automation results";
-            smtpMail.TextBody = "The results of executed tests in the file.";
-            smtpMail.AddAttachment(
-                "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/TestResults.txt");
+            SmtpMail smtpMail = new SmtpMail("TryIt")
+            {
+                From = Email,
+                To = "hovinkate@gmail.com",
+                Subject = "Test Automation results of SaucedemoTestProject",
+                TextBody = "The results of executed tests are in the attached file in this email." +
+                           $"\nTests were run {DateTime.UtcNow.ToLocalTime()}." +
+                           "\nExecution logs can be found in 'Logs' directory of the project." +
+                           "\n" +
+                           "\nBest Regards" +
+                           "\nJet Brains Rider ruled by Kate Hovin =)\n"
+            };
+            TestResults.CountStatisticToFileResult();
+            smtpMail.AddAttachment(_pathToFileWithResults);
 
-            SmtpServer oServer = new SmtpServer("smtp.mail.ru");
-            oServer.User = Email;
-            oServer.Password = Password;
-            oServer.Port = 465;
-            oServer.ConnectType = SmtpConnectType.ConnectSSLAuto;
+            SmtpServer oServer = new SmtpServer("smtp.mail.ru")
+            {
+                User = Email,
+                Password = Password,
+                Port = 465,
+                ConnectType = SmtpConnectType.ConnectSSLAuto
+            };
 
             SmtpClient oSmtp = new SmtpClient();
             oSmtp.SendMail(oServer, smtpMail);
 
-            MyLogger.CreateLogger();
-            MyLogger.InfoLogger("Email was sent successfully!",
+            _myLogger.CreateLogger();
+            _myLogger.InfoLogger("Email was sent successfully!",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (Exception ep)
         {
-            Console.WriteLine("Failed to send email with the following error: ");
-            Console.Write(ep.Message);
+            _myLogger.ErrorLogger($"Failed to send email with the following error: {ep.Message}, \n{ep.StackTrace}",
+                GetType().Namespace!,
+                GetType().Name,
+                MethodBase.GetCurrentMethod()?.Name!);
         }
     }
 
-    private void SetCredsFromFile()
+    private void GetCredsFromFile()
     {
         string[] lines =
-            File.ReadAllLines(
-                "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/emailInfo.txt");
+            File.ReadAllLines(_pathToEmailCreds);
 
         foreach (string line in lines)
         {

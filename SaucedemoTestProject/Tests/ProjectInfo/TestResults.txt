@@ -1,1 +1,4 @@
-Test 'LogInAsStandardUserTest' was executed with the failed result.
+1. Test 'CheckIfPossibleToSortByPriceFromLowToHigh' was executed with the passed result.
+2. Test 'CheckIfProductsDisplayedWhenLoggedIn' was executed with the passed result.
+3. Test 'CheckIfProductsTShirtsInTheList' was executed with the passed result.
+Amount of tests: 3. Passed: 3; Failed: 0.
