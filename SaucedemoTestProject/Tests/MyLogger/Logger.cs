@@ -1,23 +1,29 @@
 using Serilog;
+using Log = Serilog.Log;
 
 namespace Tests.MyLogger;
 
 public class Logger
 {
-    private string? _programStarts;
-    private string? _programEnds;
+    private readonly string _pathToLogFile =
+        "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/Logs/";
 
     public void CreateLogger()
     {
         Log.Logger = new LoggerConfiguration()
             .MinimumLevel.Debug()
-            .WriteTo.Console().WriteTo.File(
-                $"/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/Logs/log_"
+            .WriteTo.Console()
+            .WriteTo.File(
+                _pathToLogFile +
+                $"log_"
                 + $"{DateTime.Today.Year}-{DateTime.Now.Month}-{DateTime.Now.Day}.txt",
-                rollOnFileSizeLimit: true, fileSizeLimitBytes: 30000).CreateLogger();
+                rollOnFileSizeLimit: true,
+                fileSizeLimitBytes: 30000
+            )
+            .CreateLogger();
     }
 
-    public void InfoLogger(string logMessage, string nameSpace, string className, string methodName)
+    public static void InfoLogger(string logMessage, string nameSpace, string className, string methodName)
     {
         string? threadName = Thread.CurrentThread.Name;
         Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
@@ -28,7 +34,7 @@ public class Logger
         Log.Information(logMessage);
     }
 
-    public void DebugLogger(string logMessage, string nameSpace, string className, string methodName)
+    public static void DebugLogger(string logMessage, string nameSpace, string className, string methodName)
     {
         string? threadName = Thread.CurrentThread.Name;
         Log.Logger.Debug("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
@@ -39,7 +45,7 @@ public class Logger
         Log.Debug(logMessage);
     }
 
-    public void ErrorLogger(string logMessage, string nameSpace, string className, string methodName)
+    public static void ErrorLogger(string logMessage, string nameSpace, string className, string methodName)
     {
         string? threadName = Thread.CurrentThread.Name;
         Log.Logger.Error("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
@@ -50,17 +56,15 @@ public class Logger
         Log.Error(logMessage);
     }
 
-    public DateTime StartProgramLogging()
+    public static DateTime StartProgramLogging()
     {
-        _programStarts = DateTime.UtcNow + " UTC; Program starts";
-        Log.Information(_programStarts);
+        Log.Information("{LocalTime}; Test execution starts", DateTime.Now.ToLocalTime());
         return DateTime.Now;
     }
 
-    public DateTime FinishProgramLogging()
+    public static DateTime FinishProgramLogging()
     {
-        _programEnds = DateTime.UtcNow + " UTC; Program finished";
-        Log.Information(_programEnds);
+        Log.Information("{LocalTime}; Test execution finished", DateTime.Now.ToLocalTime());
         return DateTime.Now;
     }
 }

@@ -1,5 +1,6 @@
 using System.Reflection;
 using OpenQA.Selenium;
+using Tests.MyLogger;
 
 namespace Tests.Pages;
 
@@ -17,28 +18,25 @@ public class ProductsPage : WebPage
     private readonly By _pricesOfItemsCss = By.CssSelector(".inventory_item_price");
     private readonly By _sortedMenuCss = By.CssSelector(".product_sort_container");
 
-    public ProductsPage(IWebDriver driver) : base(driver)
-    {
-    }
 
     public ProductsPage OpenProductsPage()
     {
         OpenWebsite(_productsUrl);
-        return new ProductsPage(Driver);
+        return new ProductsPage();
     }
 
     public bool CheckIfErrorDisplayedWhenNotLoggedIn()
     {
         if (IsElementFound(_errorMessageWhenOpenProductsBeingNotLogInXPath))
         {
-            MyLogger.InfoLogger("Error message is displayed - impossible to open products page not being logged in.",
+            Logger.InfoLogger("Error message is displayed - impossible to open products page not being logged in.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
             return true;
         }
 
-        MyLogger.ErrorLogger($"Error message '{_errorMessageWhenOpenProductsBeingNotLogInXPath}' is not displayed.",
+        Logger.ErrorLogger($"Error message '{_errorMessageWhenOpenProductsBeingNotLogInXPath}' is not displayed.",
             GetType().Namespace!,
             GetType().Name,
             MethodBase.GetCurrentMethod()?.Name!);
@@ -49,7 +47,7 @@ public class ProductsPage : WebPage
     public ProductsPage OpenMenu()
     {
         ClickButton(_menuCss);
-        return new ProductsPage(Driver);
+        return new ProductsPage();
     }
 
     public LoginPage ClickLogOutButton()
@@ -73,7 +71,7 @@ public class ProductsPage : WebPage
             Console.WriteLine(ex.StackTrace);
         }
 
-        return new LoginPage(Driver);
+        return new LoginPage();
     }
 
     public IList<IWebElement> GetAllMenuItems()
@@ -90,14 +88,14 @@ public class ProductsPage : WebPage
             if (IsElementFound(_logInButtonCss))
             {
                 result = true;
-                MyLogger.InfoLogger("User successfully logged out from the account.",
+                Logger.InfoLogger("User successfully logged out from the account.",
                     GetType().Namespace!,
                     GetType().Name,
                     MethodBase.GetCurrentMethod()?.Name!);
             }
             else
             {
-                MyLogger.ErrorLogger($"User is not logged out or element '{_logInButtonCss}' not found.",
+                Logger.ErrorLogger($"User is not logged out or element '{_logInButtonCss}' not found.",
                     GetType().Namespace!,
                     GetType().Name,
                     MethodBase.GetCurrentMethod()?.Name!);
@@ -119,7 +117,7 @@ public class ProductsPage : WebPage
         IList<IWebElement> productsList = GetAllProducts();
         if (productsList.Count != 0)
         {
-            MyLogger.InfoLogger($"Products found on the products page.",
+            Logger.InfoLogger($"Products found on the products page.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
@@ -135,14 +133,14 @@ public class ProductsPage : WebPage
         var foundTshirts = productsList.Where(item => item.Text.Contains("T-Shirt"));
         if (foundTshirts.Any())
         {
-            MyLogger.InfoLogger($"It's found {foundTshirts.Count()} t-shirt(s) on the products page.",
+            Logger.InfoLogger($"It's found {foundTshirts.Count()} t-shirt(s) on the products page.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
             return true;
         }
 
-        MyLogger.ErrorLogger("No products are displayed on the products page",
+        Logger.ErrorLogger("No products are displayed on the products page",
             GetType().Namespace!,
             GetType().Name,
             MethodBase.GetCurrentMethod()?.Name!);
@@ -165,14 +163,14 @@ public class ProductsPage : WebPage
 
         if (count.Equals(sortedByComp.Length))
         {
-            MyLogger.InfoLogger("Prices were sorted correctly from low to high",
+            Logger.InfoLogger("Prices were sorted correctly from low to high",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
             return true;
         }
 
-        MyLogger.ErrorLogger("Prices were sorted incorrect from low to high",
+        Logger.ErrorLogger("Prices were sorted incorrect from low to high",
             GetType().Namespace!,
             GetType().Name,
             MethodBase.GetCurrentMethod()?.Name!);
@@ -233,7 +231,7 @@ public class ProductsPage : WebPage
         {
             Console.WriteLine(exception.StackTrace);
             Console.WriteLine(exception.Message);
-            MyLogger.ErrorLogger("FormatException, incorrect parsing of string to double.",
+            Logger.ErrorLogger("FormatException, incorrect parsing of string to double.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);

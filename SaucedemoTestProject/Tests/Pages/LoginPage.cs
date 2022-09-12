@@ -2,6 +2,7 @@ using System.Reflection;
 using OpenQA.Selenium;
 using Tests.Exceptions;
 using Tests.Models;
+using Tests.MyLogger;
 using Tests.Reflection;
 
 namespace Tests.Pages;
@@ -17,37 +18,37 @@ public class LoginPage : WebPage
     private readonly By _errorInvalidCredsXPath =
         By.XPath("//h3[contains(text(), 'Username and password do not match')]");
 
-    public LoginPage(IWebDriver driver) : base(driver)
-    {
-    }
-
-    public ProductsPage LogInToAccount(User user)
+    public void LogInToAccount(User user)
     {
         try
         {
             if (user.UserName.Equals(UsersCredentials.invalidCredsUser.ToString()))
             {
-                MyLogger.ErrorLogger("Can't log in to the account with invalid credentials",
+                InputDataToField(_userNameFieldId, user.UserName);
+                InputDataToField(_passwordFieldXpath, user.Password);
+                // Example of reflection:
+                // InputDataToField(_passwordFieldXpath, UserReflection.SetCustomValueToFieldPassword());
+                ClickButton(_logInButtonCss);
+
+                Logger.ErrorLogger("Can't log in to the account with invalid credentials",
                     GetType().Namespace!,
                     GetType().Name,
                     MethodBase.GetCurrentMethod()?.Name!);
                 throw new SuchUserDoesntExistException(
                     "Login or/and password are invalid or such user doesn't exist.");
             }
+
+            InputDataToField(_userNameFieldId, user.UserName);
+            InputDataToField(_passwordFieldXpath, user.Password);
+            ClickButton(_logInButtonCss);
         }
         catch (SuchUserDoesntExistException e)
         {
-            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+            Logger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
-
-        InputDataToField(_userNameFieldId, user.UserName);
-        InputDataToField(_passwordFieldXpath, user.Password);
-        // InputDataToField(_passwordFieldXpath, UserReflection.SetCustomValueToFieldPassword());
-        ClickButton(_logInButtonCss);
-        return new ProductsPage(Driver);
     }
 
     public bool CheckIfLoggedIn()
@@ -56,18 +57,18 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_productsTitleInHeaderCss);
-            MyLogger.InfoLogger("User logged in successfully.",
+            Logger.InfoLogger("User logged in successfully.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {
-            MyLogger.ErrorLogger("User is not logged in successfully.",
+            Logger.ErrorLogger("User is not logged in successfully.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+            Logger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
@@ -82,18 +83,18 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_lockedOutErrorXPath);
-            MyLogger.InfoLogger("Error for locked user is displayed.",
+            Logger.InfoLogger("Error for locked user is displayed.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {
-            MyLogger.ErrorLogger("Error is not displayed or not found.",
+            Logger.ErrorLogger("Error is not displayed or not found.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+            Logger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
@@ -108,18 +109,18 @@ public class LoginPage : WebPage
         try
         {
             result = IsElementFound(_errorInvalidCredsXPath);
-            MyLogger.InfoLogger("Error is displayed when non-existing user tried to log in.",
+            Logger.InfoLogger("Error is displayed when non-existing user tried to log in.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (NoSuchElementException e)
         {
-            MyLogger.ErrorLogger("Error is not displayed for non-existing user.",
+            Logger.ErrorLogger("Error is not displayed for non-existing user.",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
-            MyLogger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
+            Logger.DebugLogger($"Exception: {e.Message}, \n{e.StackTrace}",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);

@@ -1,6 +1,6 @@
 namespace Tests.EmailService;
 
-public sealed class TestResults
+public static class TestResults
 {
     private static int _counter = 1;
 
@@ -10,16 +10,16 @@ public sealed class TestResults
     public static void GetTestResults(string testName, bool isPassed)
     {
         string result;
-        if (isPassed.Equals(true))
+        switch (isPassed)
         {
-            result = $"{_counter}. Test '{testName}' was executed with the passed result.";
-            AddTestResultToFile(result);
-        }
-
-        if (isPassed.Equals(false))
-        {
-            result = $"{_counter}Test '{testName}' was executed with the failed result.";
-            AddTestResultToFile(result);
+            case true:
+                result = $"{_counter}. Test '{testName}' was executed with the passed result.";
+                AddTestResultToFile(result);
+                break;
+            case false:
+                result = $"{_counter}. Test '{testName}' was executed with the failed result.";
+                AddTestResultToFile(result);
+                break;
         }
 
         _counter++;
@@ -27,11 +27,8 @@ public sealed class TestResults
 
     private static void AddTestResultToFile(string result)
     {
-        using (StreamWriter sw =
-               File.AppendText(PathToFile))
-        {
-            sw.WriteLine(result);
-        }
+        using StreamWriter sw = File.AppendText(PathToFile);
+        sw.WriteLine(result);
     }
 
     public static void CountStatisticToFileResult()

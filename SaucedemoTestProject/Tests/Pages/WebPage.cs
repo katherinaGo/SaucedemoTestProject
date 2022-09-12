@@ -1,28 +1,20 @@
+using System.Text.Json.Serialization;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using Tests.Driver;
-using Tests.MyLogger;
 
 namespace Tests.Pages;
 
 public class WebPage
 {
-    private static IWebDriver? _driver;
-    protected static readonly Logger MyLogger = new();
-
-    public WebPage(IWebDriver driver)
-    {
-        _driver = driver;
-    }
-
-    public string BrowserName { get; set; }
+    [JsonPropertyName("BrowserName")] public string BrowserName { get; set; }
 
     public static IWebDriver Driver => DriverInstance.Driver;
 
-    public static WebDriverWait WaitImplicit => new(Driver, TimeSpan.FromSeconds(15));
+    protected static WebDriverWait WaitImplicit => new(Driver, TimeSpan.FromSeconds(15));
 
-    public static void WaitExplicit(By locator) => WaitImplicit.Until(ExpectedConditions.ElementIsVisible(locator));
+    protected static void WaitExplicit(By locator) => WaitImplicit.Until(ExpectedConditions.ElementIsVisible(locator));
 
     public void OpenWebsite(string url)
     {

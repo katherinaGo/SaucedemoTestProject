@@ -61,7 +61,8 @@ public class LoginTests : BaseTest
     public void LogOutTest()
     {
         Page?.OpenWebsite(Url);
-        LoginPage?.LogInToAccount(new User(UsersCredentials.standard_user))
+        LoginPage?.LogInToAccount(new User(UsersCredentials.standard_user));
+        ProductsPage
             .OpenMenu()
             .ClickLogOutButton();
         bool actualResult = ProductsPage!.CheckIfUserLoggedOut();

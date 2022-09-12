@@ -30,9 +30,9 @@ public class ProductsPageTests : BaseTest
     public void CheckIfPossibleToSortByPriceFromLowToHigh()
     {
         LoginPage?.OpenWebsite(Url);
-        LoginPage!.LogInToAccount(new User(UsersCredentials.standard_user));
+        LoginPage!.LogInToAccount(new User(UsersCredentials.problem_user));
         bool actualResult = ProductsPage!.CheckIfSortedByPriceFromLowToHighCorrectly();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "Items sorted not in correct order.");
+        Assert.True(actualResult, "Items not sorted.");
     }
 }

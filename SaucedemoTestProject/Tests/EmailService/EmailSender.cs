@@ -1,35 +1,31 @@
 using System.Reflection;
 using EASendMail;
+using Tests.Driver;
 using Tests.MyLogger;
 
 namespace Tests.EmailService;
 
 public class EmailSender
 {
-    private Logger _myLogger = new();
-
     private readonly string _pathToEmailCreds =
         "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/emailInfo.txt";
 
     private readonly string _pathToFileWithResults =
         "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/TestResults.txt";
 
-    public string? Email { get; private set; }
-
-    public string? Password { get; private set; }
-
     public void SendEmailWithResults()
     {
-        GetCredsFromFile();
+        Tuple<string, string>? emailAndPassword = GetCredsFromFile();
+
         try
         {
             SmtpMail smtpMail = new SmtpMail("TryIt")
             {
-                From = Email,
+                From = emailAndPassword?.Item1,
                 To = "hovinkate@gmail.com",
                 Subject = "Test Automation results of SaucedemoTestProject",
                 TextBody = "The results of executed tests are in the attached file in this email." +
-                           $"\nTests were run {DateTime.UtcNow.ToLocalTime()}." +
+                           $"\nTests were run on {DriverInstance.GetDefaultBrowserName()} browser." +
                            "\nExecution logs can be found in 'Logs' directory of the project." +
                            "\n" +
                            "\nBest Regards" +
@@ -40,8 +36,8 @@ public class EmailSender
 
             SmtpServer oServer = new SmtpServer("smtp.mail.ru")
             {
-                User = Email,
-                Password = Password,
+                User = emailAndPassword?.Item1,
+                Password = emailAndPassword?.Item2,
                 Port = 465,
                 ConnectType = SmtpConnectType.ConnectSSLAuto
             };
@@ -49,37 +45,41 @@ public class EmailSender
             SmtpClient oSmtp = new SmtpClient();
             oSmtp.SendMail(oServer, smtpMail);
 
-            _myLogger.CreateLogger();
-            _myLogger.InfoLogger("Email was sent successfully!",
+            // _myLogger.CreateLogger();
+            Logger.InfoLogger("Email was sent successfully!",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
         catch (Exception ep)
         {
-            _myLogger.ErrorLogger($"Failed to send email with the following error: {ep.Message}, \n{ep.StackTrace}",
+            Logger.ErrorLogger($"Failed to send email with the following error: {ep.Message}, \n{ep.StackTrace}",
                 GetType().Namespace!,
                 GetType().Name,
                 MethodBase.GetCurrentMethod()?.Name!);
         }
     }
 
-    private void GetCredsFromFile()
+    private Tuple<string, string> GetCredsFromFile()
     {
-        string[] lines =
-            File.ReadAllLines(_pathToEmailCreds);
+        string[] lines = File.ReadAllLines(_pathToEmailCreds);
 
-        foreach (string line in lines)
+        string email = "";
+        string password = "";
+
+        foreach (var line in lines)
         {
             if (line.Contains("email"))
             {
-                Email = line.Remove(0, "email: ".Length);
+                email = line.Split(":").Last().Trim();
             }
 
             if (line.Contains("password"))
             {
-                Password = line.Remove(0, "password: ".Length);
+                password = line.Split(":").Last().Trim();
             }
         }
+
+        return Tuple.Create(email, password);
     }
 }

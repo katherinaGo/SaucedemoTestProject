@@ -1,5 +1,4 @@
 using System.Reflection;
-using OpenQA.Selenium;
 using Tests.Driver;
 using Tests.EmailService;
 using Tests.MyLogger;
@@ -10,7 +9,6 @@ namespace Tests.Tests;
 public class BaseTest
 {
     protected const string Url = "https://www.saucedemo.com/";
-    private static IWebDriver? _driver;
     private DateTime _startTime;
     private DateTime _endTime;
     private Logger? _myLogger;
@@ -22,18 +20,12 @@ public class BaseTest
 
     protected static WebPage? Page { get; private set; }
 
-    private static IWebDriver Driver
-    {
-        get => DriverInstance.Driver;
-        set => _driver = value;
-    }
-
     [OneTimeSetUp]
     public void OneTimeSetUp()
     {
         _myLogger = new Logger();
         _myLogger.CreateLogger();
-        _startTime = _myLogger.StartProgramLogging();
+        _startTime = Logger.StartProgramLogging();
         _emailSender = new EmailSender();
         TestResults.ClearFileBeforeTestExecution();
     }
@@ -41,17 +33,16 @@ public class BaseTest
     [SetUp]
     public void SetUp()
     {
-        Driver = DriverInstance.Driver;
-        Page = new WebPage(Driver);
-        LoginPage = new LoginPage(Driver);
-        ProductsPage = new ProductsPage(Driver);
+        Page = new WebPage();
+        LoginPage = new LoginPage();
+        ProductsPage = new ProductsPage();
     }
 
     [OneTimeTearDown]
     public void OneTimeTearDown()
     {
-        _endTime = _myLogger!.FinishProgramLogging();
-        _myLogger.InfoLogger($"Tests time execution: {_endTime - _startTime}, hh:mm:ss:ms",
+        _endTime = Logger.FinishProgramLogging();
+        Logger.InfoLogger($"Tests time execution: {_endTime - _startTime}, hh:mm:ss:ms",
             GetType().Namespace!,
             GetType().Name,
             MethodBase.GetCurrentMethod()?.Name!);
