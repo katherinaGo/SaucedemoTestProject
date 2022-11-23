@@ -33,9 +33,9 @@ public static class TestResults
 
     public static void CountStatisticToFileResult()
     {
-        string[] lines = File.ReadAllLines(PathToFile);
-        int passed = 0;
-        int failed = 0;
+        var lines = File.ReadAllLines(PathToFile);
+        var passed = 0;
+        var failed = 0;
         foreach (var line in lines)
         {
             if (line.Contains("passed"))
@@ -49,7 +49,7 @@ public static class TestResults
             }
         }
 
-        string statistic = $"Amount of tests: {lines.Length}. Passed: {passed}; Failed: {failed}.";
+        var statistic = $"Amount of tests: {lines.Length}. Passed: {passed}; Failed: {failed}.";
 
         AddTestResultToFile(statistic);
     }

@@ -11,9 +11,9 @@ public class ProductsPageTests : BaseTest
     {
         LoginPage?.OpenWebsite(Url);
         LoginPage!.LogInToAccount(new User(UsersCredentials.standard_user));
-        bool actualResult = ProductsPage!.CheckIfItemsDisplayed();
+        var actualResult = ProductsPage!.CheckIfItemsDisplayed();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "No items displayed");
+        Assert.That(actualResult, Is.True, "No items displayed");
     }
 
     [Test]
@@ -21,9 +21,9 @@ public class ProductsPageTests : BaseTest
     {
         LoginPage?.OpenWebsite(Url);
         LoginPage!.LogInToAccount(new User(UsersCredentials.standard_user));
-        bool actualResult = ProductsPage!.CheckIfTShirtsInTheList();
+        var actualResult = ProductsPage!.CheckIfTShirtsInTheList();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "No t-shirts found");
+        Assert.That(actualResult, Is.True, "No t-shirts found");
     }
 
     [Test]
@@ -31,8 +31,8 @@ public class ProductsPageTests : BaseTest
     {
         LoginPage?.OpenWebsite(Url);
         LoginPage!.LogInToAccount(new User(UsersCredentials.problem_user));
-        bool actualResult = ProductsPage!.CheckIfSortedByPriceFromLowToHighCorrectly();
+        var actualResult = ProductsPage!.CheckIfSortedByPriceFromLowToHighCorrectly();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "Items not sorted.");
+        Assert.That(actualResult, Is.True, "Items not sorted.");
     }
 }

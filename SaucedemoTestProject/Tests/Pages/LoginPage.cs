@@ -53,7 +53,7 @@ public class LoginPage : WebPage
 
     public bool CheckIfLoggedIn()
     {
-        bool result = false;
+        var result = false;
         try
         {
             result = IsElementFound(_productsTitleInHeaderCss);
@@ -79,7 +79,7 @@ public class LoginPage : WebPage
 
     public bool CheckIfLockedOutErrorDisplayed()
     {
-        bool result = false;
+        var result = false;
         try
         {
             result = IsElementFound(_lockedOutErrorXPath);
@@ -105,7 +105,7 @@ public class LoginPage : WebPage
 
     public bool CheckIfErrorDisplayedForNonExistingUser()
     {
-        bool result = false;
+        var result = false;
         try
         {
             result = IsElementFound(_errorInvalidCredsXPath);

@@ -25,7 +25,7 @@ public class Logger
 
     public static void InfoLogger(string logMessage, string nameSpace, string className, string methodName)
     {
-        string? threadName = Thread.CurrentThread.Name;
+        var threadName = Thread.CurrentThread.Name;
         Log.Logger.Information("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
             nameSpace,
             className,
@@ -36,7 +36,7 @@ public class Logger
 
     public static void DebugLogger(string logMessage, string nameSpace, string className, string methodName)
     {
-        string? threadName = Thread.CurrentThread.Name;
+        var threadName = Thread.CurrentThread.Name;
         Log.Logger.Debug("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
             nameSpace,
             className,
@@ -47,7 +47,7 @@ public class Logger
 
     public static void ErrorLogger(string logMessage, string nameSpace, string className, string methodName)
     {
-        string? threadName = Thread.CurrentThread.Name;
+        var threadName = Thread.CurrentThread.Name;
         Log.Logger.Error("Namespace: {Namespace}, Class: {Class}, MethodName: {MethodName}, Thread: {ThreadName}",
             nameSpace,
             className,

@@ -8,7 +8,7 @@ namespace Tests.Pages;
 
 public class WebPage
 {
-    [JsonPropertyName("BrowserName")] public string BrowserName { get; set; }
+    [JsonPropertyName("BrowserName")] public string? BrowserName { get; set; }
 
     public static IWebDriver Driver => DriverInstance.Driver;
 
@@ -28,13 +28,13 @@ public class WebPage
 
     protected void ClickButton(By selector) => FindElement(selector).Click();
 
-    protected void InputDataToField(By selector, string textToType) => FindElement(selector).SendKeys(textToType);
+    protected void InputDataToField(By selector, string? textToType) => FindElement(selector).SendKeys(textToType);
 
     protected bool IsElementFound(By selector) => FindElement(selector).Displayed;
 
     protected void SelectElementInDropdown(By selector, string textOfItemToClick)
     {
-        SelectElement select = new SelectElement(FindElement(selector));
+        var select = new SelectElement(FindElement(selector));
         select.SelectByText(textOfItemToClick);
     }
 }

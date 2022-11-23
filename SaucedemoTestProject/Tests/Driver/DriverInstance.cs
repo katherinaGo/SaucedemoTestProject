@@ -16,13 +16,13 @@ public static class DriverInstance
 
     public static IWebDriver Driver => InitializeDriver();
 
-    public static string GetDefaultBrowserName()
+    public static string? GetDefaultBrowserName()
     {
-        string json =
+        var json =
             File.ReadAllText(
                 "/Users/kate/RiderProjects/SaucedemoTestProject/SaucedemoTestProject/Tests/ProjectInfo/configuration.json");
-        WebPage? page = JsonConvert.DeserializeObject<WebPage>(json);
-        string defaultBrowserName = page!.BrowserName;
+        var page = JsonConvert.DeserializeObject<WebPage>(json);
+        var defaultBrowserName = page!.BrowserName;
         return defaultBrowserName;
     }
 
@@ -36,7 +36,7 @@ public static class DriverInstance
     {
         try
         {
-            string browser = GetDefaultBrowserName().ToLower();
+            var browser = GetDefaultBrowserName().ToLower();
             if (_driver == null)
             {
                 switch (browser)
@@ -77,6 +77,6 @@ public static class DriverInstance
                 MethodBase.GetCurrentMethod()?.Name!);
         }
 
-        return _driver;
+        return _driver!;
     }
 }

@@ -11,9 +11,9 @@ public class LoginTests : BaseTest
     {
         Page?.OpenWebsite(Url);
         LoginPage?.LogInToAccount(new User(UsersCredentials.standard_user));
-        bool actualResult = LoginPage!.CheckIfLoggedIn();
+        var actualResult = LoginPage!.CheckIfLoggedIn();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "Not logged in");
+        Assert.That(actualResult, Is.True, "Not logged in");
     }
 
     [Test]
@@ -23,7 +23,7 @@ public class LoginTests : BaseTest
         LoginPage!.LogInToAccount(new User(UsersCredentials.locked_out_user));
         bool actualResult = LoginPage.CheckIfLockedOutErrorDisplayed();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "Error is not displayed or element not found.");
+        Assert.That(actualResult, Is.True, "Error is not displayed or element not found.");
     }
 
     [Test]
@@ -31,9 +31,9 @@ public class LoginTests : BaseTest
     {
         Page?.OpenWebsite(Url);
         LoginPage?.LogInToAccount(new User(UsersCredentials.problem_user));
-        bool actualResult = LoginPage!.CheckIfLoggedIn();
+        var actualResult = LoginPage!.CheckIfLoggedIn();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
-        Assert.True(actualResult, "Error is not displayed or element not found.");
+        Assert.That(actualResult, Is.True, "Error is not displayed or element not found.");
     }
 
     [Test]
@@ -41,7 +41,7 @@ public class LoginTests : BaseTest
     {
         Page?.OpenWebsite(Url);
         LoginPage?.LogInToAccount(new User(UsersCredentials.invalidCredsUser));
-        bool actualResult = LoginPage!.CheckIfErrorDisplayedForNonExistingUser();
+        var actualResult = LoginPage!.CheckIfErrorDisplayedForNonExistingUser();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
         Assert.That(actualResult, Is.EqualTo(true));
     }
@@ -49,7 +49,7 @@ public class LoginTests : BaseTest
     [Test]
     public void OpenProductsPageWhenNotLoggedInTest()
     {
-        bool actualResult = ProductsPage!
+        var actualResult = ProductsPage!
             .OpenProductsPage()
             .CheckIfErrorDisplayedWhenNotLoggedIn();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
@@ -62,10 +62,10 @@ public class LoginTests : BaseTest
     {
         Page?.OpenWebsite(Url);
         LoginPage?.LogInToAccount(new User(UsersCredentials.standard_user));
-        ProductsPage
+        ProductsPage?
             .OpenMenu()
             .ClickLogOutButton();
-        bool actualResult = ProductsPage!.CheckIfUserLoggedOut();
+        var actualResult = ProductsPage!.CheckIfUserLoggedOut();
         TestResults.GetTestResults(MethodBase.GetCurrentMethod()?.Name!, actualResult);
         Assert.That(actualResult, Is.EqualTo(true), "User is not logged out or element was not found.");
     }

@@ -15,13 +15,13 @@ public class EmailSender
 
     public void SendEmailWithResults()
     {
-        Tuple<string, string>? emailAndPassword = GetCredsFromFile();
+        var emailAndPassword = GetCredsFromFile();
 
         try
         {
-            SmtpMail smtpMail = new SmtpMail("TryIt")
+            var smtpMail = new SmtpMail("TryIt")
             {
-                From = emailAndPassword?.Item1,
+                From = emailAndPassword?.Item1!,
                 To = "hovinkate@gmail.com",
                 Subject = "Test Automation results of SaucedemoTestProject",
                 TextBody = "The results of executed tests are in the attached file in this email." +
@@ -34,15 +34,15 @@ public class EmailSender
             TestResults.CountStatisticToFileResult();
             smtpMail.AddAttachment(_pathToFileWithResults);
 
-            SmtpServer oServer = new SmtpServer("smtp.mail.ru")
+            var oServer = new SmtpServer("smtp.mail.ru")
             {
-                User = emailAndPassword?.Item1,
-                Password = emailAndPassword?.Item2,
+                User = emailAndPassword?.Item1!,
+                Password = emailAndPassword?.Item2!,
                 Port = 465,
                 ConnectType = SmtpConnectType.ConnectSSLAuto
             };
 
-            SmtpClient oSmtp = new SmtpClient();
+            var oSmtp = new SmtpClient();
             oSmtp.SendMail(oServer, smtpMail);
 
             // _myLogger.CreateLogger();
@@ -62,10 +62,10 @@ public class EmailSender
 
     private Tuple<string, string> GetCredsFromFile()
     {
-        string[] lines = File.ReadAllLines(_pathToEmailCreds);
+        var lines = File.ReadAllLines(_pathToEmailCreds);
 
-        string email = "";
-        string password = "";
+        var email = "";
+        var password = "";
 
         foreach (var line in lines)
         {

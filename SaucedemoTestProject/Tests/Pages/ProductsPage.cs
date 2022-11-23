@@ -114,7 +114,7 @@ public class ProductsPage : WebPage
 
     public bool CheckIfItemsDisplayed()
     {
-        IList<IWebElement> productsList = GetAllProducts();
+        var productsList = GetAllProducts();
         if (productsList.Count != 0)
         {
             Logger.InfoLogger($"Products found on the products page.",
@@ -129,7 +129,7 @@ public class ProductsPage : WebPage
 
     public bool CheckIfTShirtsInTheList()
     {
-        IList<IWebElement> productsList = GetAllProducts();
+        var productsList = GetAllProducts();
         var foundTshirts = productsList.Where(item => item.Text.Contains("T-Shirt"));
         if (foundTshirts.Any())
         {
@@ -194,8 +194,8 @@ public class ProductsPage : WebPage
 
     private double[] GetPricesOfItemsOnTheProductsPageAndSortFromLowToHigh()
     {
-        IList<IWebElement> pricesOfItems = FindElements(_pricesOfItemsCss);
-        double[] prices = ParseStringToDouble(pricesOfItems);
+        var pricesOfItems = FindElements(_pricesOfItemsCss);
+        var prices = ParseStringToDouble(pricesOfItems);
         Array.Sort(prices);
         return prices;
     }
@@ -203,8 +203,8 @@ public class ProductsPage : WebPage
     private double[] GetSortedPricesOfItemsOnTheProductsPageFromLowToHigh()
     {
         SortByPriceFromLowToHigh();
-        IList<IWebElement> pricesOfItems = FindElements(_pricesOfItemsCss);
-        double[] prices = ParseStringToDouble(pricesOfItems);
+        var pricesOfItems = FindElements(_pricesOfItemsCss);
+        var prices = ParseStringToDouble(pricesOfItems);
         return prices;
     }
 
@@ -215,11 +215,11 @@ public class ProductsPage : WebPage
 
     private double[] ParseStringToDouble(IList<IWebElement> pricesOfItems)
     {
-        string[] pricesStrings = new string[pricesOfItems.Count];
-        double[] prices = new Double[pricesOfItems.Count];
+        var pricesStrings = new string[pricesOfItems.Count];
+        var prices = new double[pricesOfItems.Count];
         try
         {
-            for (int i = 0; i < pricesOfItems.Count; i++)
+            for (var i = 0; i < pricesOfItems.Count; i++)
             {
                 pricesStrings[i] = pricesOfItems[i].Text.Trim('$').Replace('.', ',');
                 prices[i] = Convert.ToDouble(pricesStrings[i]);
